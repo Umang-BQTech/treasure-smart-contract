@@ -1,5 +1,4 @@
 import {task, types} from "hardhat/config";
-import {ethers} from "hardhat";
 
 interface TaskParams {
     contract: string;
@@ -8,7 +7,7 @@ interface TaskParams {
 }
 
 task("approve-tokens")
-    .setDescription("Change DAO of the ColdTreasury contract")
+    .setDescription("Call Treasury.approveToken (admin) to set ERC-20 allowance for a spender")
     .addParam<string>("contract", "Contract address", undefined, types.string)
     .addParam<string>("token", "Token address", undefined, types.string)
     .addParam<string>("approveAddress", "Approve address", undefined, types.string)
@@ -21,7 +20,6 @@ task("approve-tokens")
             if (!ethers.isAddress(contractAddress)) {
                 throw new Error("Invalid contract address");
             }
-            console.log(tokenAddress)
             if (!ethers.isAddress(tokenAddress)) {
                 throw new Error("Invalid token address");
             }

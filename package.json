@@ -1,6 +1,8 @@
 {
-  "name": "prediction-game-contract",
+  "name": "treasury-smart-contract",
   "version": "1.0.0",
+  "description": "UUPS upgradeable ERC-20 treasury and Base bridge integration (Hardhat + OpenZeppelin)",
+  "private": true,
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.5",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
@@ -21,6 +23,8 @@
     "@openzeppelin/contracts-upgradeable": "^5.0.0"
   },
   "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile",
     "solhint": "./node_modules/.bin/solhint -f table 'contracts/**/*.sol'",
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier:js": "./node_modules/.bin/prettier --write \"**/*.{js,ts,json}\""

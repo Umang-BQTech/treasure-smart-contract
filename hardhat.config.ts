@@ -4,6 +4,12 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
 import "./tasks";
 
+const rawOwnerKey = process.env.OWNER_KEY?.trim();
+const rpcAccounts =
+    rawOwnerKey && rawOwnerKey !== '""'
+        ? [rawOwnerKey.startsWith("0x") ? rawOwnerKey : `0x${rawOwnerKey}`]
+        : undefined;
+
 const config: HardhatUserConfig = {
     solidity: {
         compilers: [
@@ -27,20 +33,20 @@ const config: HardhatUserConfig = {
         sepolia_base: {
             chainId: 84532,
             url: "https://sepolia.base.org",
-            accounts: [process.env.OWNER_KEY] ?? [""],
+            ...(rpcAccounts ? {accounts: rpcAccounts} : {}),
         },
         base: {
             chainId: 8453,
             url: "https://mainnet.base.org",
-            accounts: [process.env.OWNER_KEY] ?? [""],
+            ...(rpcAccounts ? {accounts: rpcAccounts} : {}),
         },
         testnet_ulx: {
             url: "https://ultron-dev.io",
-            accounts: [process.env.OWNER_KEY] ?? [""],
+            ...(rpcAccounts ? {accounts: rpcAccounts} : {}),
         },
         ulx: {
             url: "https://ultron-rpc.net",
-            accounts: [process.env.OWNER_KEY] ?? [""],
+            ...(rpcAccounts ? {accounts: rpcAccounts} : {}),
         },
     },
     etherscan: {
